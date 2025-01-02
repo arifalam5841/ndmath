@@ -1,0 +1,38 @@
+[
+  {
+    "imgSrc": "1.webp",
+    "title": "PYQs ofafd diploma",
+    "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quas quasi vitae fugiat ab ipsa animi rerum similique voluptate.q",
+    "type": "POL",
+    "branch": "AO",
+    "year": "second year",
+    "link": "1.pdf"
+  },
+  {
+    "imgSrc": "2.jpg",
+    "title": "PYQs of ddddiploma - Semester 2",
+    "description": "Another description for a different slide content.",
+    "type": "ENG",
+    "branch": "AS",
+    "year": "first year",
+    "link": "2.pdf"
+  },
+  {
+    "imgSrc": "3.webp",
+    "title": "PYQs of diploma - Semester 2",
+    "description": "Another description for a different slide content.",
+    "type": "ENG",
+    "branch": "AS",
+    "year": "first year",
+    "link": "3.pdf"
+  },
+  {
+    "imgSrc": "4.jpg",
+    "title": "PYQs of diploma - Semester 2",
+    "description": "Another description for a different slide content.",
+    "type": "ENG",
+    "branch": "AS",
+    "year": "first year",
+    "link": "4.pdf"
+  }
+]

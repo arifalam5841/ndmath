@@ -1,0 +1,27 @@
+{
+  "name": "main-ndmaths",
+  "version": "1.0.0",
+  "description": "This is a college webstie . Here studets can get all important notes and study materials of all subject. Students can also get to know what is going on in the college like events and programmes.",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.7.9",
+    "body-parser": "^1.20.3",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "express-handlebars": "^8.0.1",
+    "hbs": "^4.2.0",
+    "multer": "^1.4.5-lts.1",
+    "path": "^0.12.7",
+    "requests": "^0.3.0",
+    "validator": "^13.12.0"
+  }
+}
