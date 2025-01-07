@@ -82,6 +82,8 @@ setInterval(scroll_forward, 2000);
 //   },
 // ];
 
+let adminstatus = document.getElementById("adminstatus");
+
 const slide_container = document.getElementById("slides_container");
 
 slide_container.innerHTML = "";
@@ -94,14 +96,27 @@ axios
     console.log(slides);
     slides.forEach((data) => {
       // Create the outer "slide" div
+
       const slideDiv = document.createElement("div");
       slideDiv.classList.add("slide");
+
+      // ELEMENT CODE -----------------
+      const slidecode = document.createElement("p");
+      slidecode.textContent = data.elementcode;
+      if (adminstatus.textContent == "admin") {
+        slidecode.style.display = "block";
+        adminstatus.style.display = "block";
+      } else {
+        slidecode.style.display = "none";
+        adminstatus.style.display = "none";
+      }
+      //END OF ELEMENT CODE -----------------
 
       // Create and set up the image element
       const imgElement = document.createElement("img");
       imgElement.src = `/slideimg/${data.imgSrc}`;
       imgElement.alt = data.title;
-      slideDiv.appendChild(imgElement);
+      slideDiv.append(slidecode, imgElement);
 
       // Create the slide info div
       const slideInfoDiv = document.createElement("div");

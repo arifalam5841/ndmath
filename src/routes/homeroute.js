@@ -7,7 +7,9 @@ const path = require("path");
 // const route = app.route();
 
 route.get("/", (req, res) => {
-  res.render("index");
+  res.render("index", {
+    adminstatus: "customer",
+  });
 });
 
 //  BANNER IS COMMONN FOR EVERY DEPARTMENT STUDENTS ---

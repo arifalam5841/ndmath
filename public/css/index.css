@@ -8,6 +8,13 @@
 /* FOOTER ------------ */
 
 /* Footer Styles */
+
+#adminstatus {
+  margin-left: 20px;
+  margin-top: 20px;
+  font-family: "Courier New", Courier, monospace;
+}
+
 .footer {
   background-color: #b5b5b529; /* Light gray background for a faded white look */
   color: #5c5b5b; /* Dark text for contrast */

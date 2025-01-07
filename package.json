@@ -18,10 +18,12 @@
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "express-handlebars": "^8.0.1",
+    "fs-extra": "^11.2.0",
     "hbs": "^4.2.0",
     "multer": "^1.4.5-lts.1",
     "path": "^0.12.7",
     "requests": "^0.3.0",
+    "simple-git": "^3.27.0",
     "validator": "^13.12.0"
   }
 }

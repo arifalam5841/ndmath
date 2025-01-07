@@ -3,9 +3,92 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Admin</title>
+    <link rel="stylesheet" href="/css/admincss.css" />
   </head>
   <body>
 
-    <h1>Admin page</h1>
+    <h1 class="hds">Admin page</h1>
+    <h1 class="hds" style="font-size: 21px; color:blue;">Please refresh the page
+      if want to go back</h1>
+    <div id="main-container">
+
+      <div class="f" id="all-options">
+        <h3 class="hds">Customization</h3>
+        <button id="slide-btn" class="btn">Slides</button>
+        {{! <button class="btn">Slides</button>
+        <button class="btn">Slides</button>
+        <button class="btn">Slides</button> }}
+
+      </div>
+
+      <div style="display: none;" class="f" id="slideoption">
+        <buttton class="btn" id="addslide">Add slides</buttton>
+        <buttton class="btn" id="removeslide">Remove slides</buttton>
+      </div>
+
+      {{! ADDDING SLIDES -------------------------- }}
+      <form
+        method="post"
+        action="/addingslide"
+        class="f"
+        style="display: none;"
+        id="addslide-cont"
+        enctype="multipart/form-data"
+      >
+
+        <input type="text" placeholder="Slide Heading" name="slidehead" />
+        <input type="text" placeholder="Discription" name="discription" />
+        <input
+          type="text"
+          placeholder="Degree(DEG) or diploma...(DIP)"
+          name="degdip"
+        />
+        <input
+          type="text"
+          placeholder="Branch and year eg. CO-1"
+          name="branch"
+        />
+
+        <p>Pdf file :</p>
+        <input
+          type="file"
+          id="slidefile"
+          name="slidepdf"
+          accept="application/pdf"
+          required
+        />
+        <p>Banner Bg image :</p>
+        <input
+          type="file"
+          id="poster"
+          name="bgimage"
+          accept="image/*"
+          required
+        />
+
+        <button class="btn" type="submit">Subit</button>
+        <p id="process">process status - null</p>
+      </form>
+
+      {{! REMOVING SLIDES ----------------------- }}
+
+      <form
+        class="f"
+        style="display: none;"
+        id="removingslidecont"
+        action="/removingslide"
+        method="post"
+      >
+        <input
+          type="Number"
+          placeholder="Enter the code of the slide"
+          name="slidecode"
+        />
+
+        <button class="btn" id="submit">Remove</button>
+      </form>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="/scripts/adminscript.js"></script>
   </body>
 </html>
