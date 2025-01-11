@@ -21,6 +21,7 @@ const git = simpleGit();
 // hello this is from the website
 // hello this is from the website
 // hello this is from the website
+// hiii this commmit is from website itself
 
 // THIS IS FOR GETING THE CODE OF EACH ELEMENT IN THE PAGE TO REMOVE THE ELEMENT
 route.get("/admin-code", (req, res) => {
