@@ -22,7 +22,17 @@ blocknone(alloptionscont, alloptionscont, slideoptioncont);
 blocknone(addslide, slideoptioncont, addingslidescont);
 blocknone(removeslide, slideoptioncont, removingslidescont);
 
-// updatingbtn.addEventListener("click", function () {});
+updatingbtn.addEventListener("click", function () {
+  axios
+    .get("http://localhost:3000/update-repo")
+    .then((response) => {
+      alert(response.data); // Show success message
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+      alert("Failed to update repository");
+    });
+});
 
 function updatefile() {
   axios
