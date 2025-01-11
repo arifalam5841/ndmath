@@ -89,7 +89,7 @@ const slide_container = document.getElementById("slides_container");
 slide_container.innerHTML = "";
 
 axios
-  .post("/banner-append")
+  .post("https://ndmath-5vtg.vercel.app/banner-append")
   .then((response) => {
     // Loop through each object in the array and create a slide
     const slides = response.data.bannerarray;

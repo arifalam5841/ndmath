@@ -28,7 +28,7 @@ app.engine(
 
 app.use(
   cors({
-    origin: "https://ndmath-5vtg.vercel.app", // Your Vercel frontend URL
+    origin: "https://ndmath-5vtg.vercel.app/", // Your Vercel frontend URL
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
