@@ -9,7 +9,7 @@ const { engine } = require("express-handlebars");
 const path = require("path");
 const publicfilepath = path.join(__dirname, "../public");
 const partialspath = path.join(__dirname, "../public/partials");
-
+const cors = require("cors");
 const homeroute = require("./routes/homeroute");
 const adminrotue = require("./routes/adminroute");
 app.use(bodyparse.urlencoded({ extend: true }));
@@ -23,6 +23,14 @@ app.engine(
     defaultLayout: false,
     layoutsDir: path.join(__dirname, "../views"),
     partialsDir: partialspath,
+  })
+);
+
+app.use(
+  cors({
+    origin: "https://ndmath-5vtg.vercel.app", // Your Vercel frontend URL
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
   })
 );
 

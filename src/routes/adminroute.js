@@ -8,20 +8,6 @@ const path = require("path");
 const simpleGit = require("simple-git");
 const git = simpleGit();
 const { exec } = require("child_process");
-// const route = app.route();
-// const route = app.route();
-// const route = app.route();
-// const route = app.route();
-// const route = app.route();
-// const route = app.route();
-// const route = app.route();
-// const route = app.route();
-// const route = app.route();
-// hello this is from the website
-// hello this is from the website
-// hello this is from the website
-// hello this is from the website
-// hiii this commmit is from website itselfd
 
 // THIS IS FOR GETING THE CODE OF EACH ELEMENT IN THE PAGE TO REMOVE THE ELEMENT
 route.get("/admin-code", (req, res) => {
@@ -91,7 +77,7 @@ route.post("/addingslide", uploadFields, async (req, res) => {
   const { slidehead, discription, degdip, branch } = req.body;
 
   const poster = req.files["bgimage"] ? req.files["bgimage"][0].filename : null;
-  const postes = req.files["bgimage"] ? req.files["bgimage"][0] : null;
+  const postes = req.files["bgimage"] ? req.files["bgimage"][0].size : null;
 
   console.log(postes);
   const pdfFile = req.files["slidepdf"]
