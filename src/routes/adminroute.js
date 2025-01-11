@@ -12,6 +12,11 @@ const git = simpleGit();
 // const route = app.route();
 // const route = app.route();
 // const route = app.route();
+// const route = app.route();
+// const route = app.route();
+// const route = app.route();
+// const route = app.route();
+// const route = app.route();
 
 // THIS IS FOR GETING THE CODE OF EACH ELEMENT IN THE PAGE TO REMOVE THE ELEMENT
 route.get("/admin-code", (req, res) => {
