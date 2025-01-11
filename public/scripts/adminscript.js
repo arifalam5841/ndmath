@@ -34,18 +34,18 @@ function updatefile() {
     });
 }
 
-updatingbtn.addEventListener("click", function () {
-  // axios
-  //   .get("http://localhost:3000/update-repo")
-  //   .then((response) => {
-  //     alert(response.data); // Show success message
-  //   })
-  //   .catch((error) => {
-  //     console.error("Error:", error);
-  //     alert("Failed to update repository");
-  //   });
+// updatingbtn.addEventListener("click", function () {
+// axios
+//   .get("http://localhost:3000/update-repo")
+//   .then((response) => {
+//     alert(response.data); // Show success message
+//   })
+//   .catch((error) => {
+//     console.error("Error:", error);
+//     alert("Failed to update repository");
+//   });
 
-  updatefile();
-});
+// updatefile();
+// });
 
 // updatefile();
