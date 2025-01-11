@@ -85,6 +85,13 @@ route.post("/addingslide", uploadFields, async (req, res) => {
     : null;
   // const poster = req.file ? req.file.filename : null;
   // const pdfFile = req.file ? req.file.filename : null;
+  // const pdfFile = req.file ? req.file.filename : null;
+  // const pdfFile = req.file ? req.file.filename : null;
+  // const pdfFile = req.file ? req.file.filename : null;
+  // const pdfFile = req.file ? req.file.filename : null;
+  // const pdfFile = req.file ? req.file.filename : null;
+  // const pdfFile = req.file ? req.file.filename : null;
+  // new file
 
   try {
     console.log(slidehead, discription);
