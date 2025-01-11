@@ -33,3 +33,7 @@ updatingbtn.addEventListener("click", function () {
       alert("Failed to update repository");
     });
 });
+
+function updatefile() {
+  console.log("this is form updatfile");
+}
