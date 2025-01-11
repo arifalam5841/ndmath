@@ -131,23 +131,41 @@ route.post("/addingslide", uploadFields, async (req, res) => {
     console.log(error);
   }
 });
-route.get("/update-repo", (req, res) => {
-  // Use the full path to Git Bash
-  exec(
-    '"C:/Program Files/Git/bin/bash.exe" ./update_repo.sh',
-    { cwd: "C:/Users/MD Arif Alam/Desktop/ndmath/ndmath" },
-    (err, stdout, stderr) => {
-      if (err) {
-        console.error(`exec error: ${err}`);
-        return res.status(500).send("Failed to update repository");
-      }
-      console.log(`stdout: ${stdout}`);
-      console.error(`stderr: ${stderr}`);
-      res.send("Repository updated successfully");
-    }
-  );
-});
 
+route.get("/update-repo", (req, res) => {
+  const privateKey = process.env.SSH_PRIVATE_KEY;
+
+  if (!privateKey) {
+    console.error("SSH_PRIVATE_KEY is not set.");
+    return res.status(500).send("SSH key is not configured.");
+  }
+
+  // Adjusted repo and script paths based on your folder structure
+  const repoPath = path.join(__dirname, "../../"); // Root directory (NDMATH)
+  const scriptPath = path.join(repoPath, "update_repo.sh");
+
+  const setupSSHCommand = `
+    mkdir -p ~/.ssh &&
+    echo "${privateKey}" > ~/.ssh/id_rsa &&
+    chmod 600 ~/.ssh/id_rsa &&
+    ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
+  `;
+
+  const updateCommand = `
+    ${setupSSHCommand} &&
+    bash ${scriptPath}
+  `;
+
+  exec(updateCommand, { cwd: repoPath }, (err, stdout, stderr) => {
+    if (err) {
+      console.error(`exec error: ${err}`);
+      return res.status(500).send("Failed to update repository");
+    }
+    console.log(`stdout: ${stdout}`);
+    console.error(`stderr: ${stderr}`);
+    res.send("Repository updated successfully");
+  });
+});
 // heloooooo
 
 route.get("/fileupdated", (req, res) => {
