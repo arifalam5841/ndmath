@@ -7,7 +7,7 @@ const multer = require("multer");
 const path = require("path");
 const simpleGit = require("simple-git");
 const git = simpleGit();
-
+const { exec } = require("child_process");
 // const route = app.route();
 // const route = app.route();
 // const route = app.route();
@@ -21,7 +21,7 @@ const git = simpleGit();
 // hello this is from the website
 // hello this is from the website
 // hello this is from the website
-// hiii this commmit is from website itself
+// hiii this commmit is from website itselfd
 
 // THIS IS FOR GETING THE CODE OF EACH ELEMENT IN THE PAGE TO REMOVE THE ELEMENT
 route.get("/admin-code", (req, res) => {
@@ -137,14 +137,26 @@ route.post("/addingslide", uploadFields, async (req, res) => {
 
     const pdfFilePath = path.join(pdfFolder, pdfFile);
 
-    await git.add([pdfFilePath]);
-    await git.commit("adding new data");
-    await git.push();
-    await git.status();
     res.redirect("/fileupdated");
   } catch (error) {
     console.log(error);
   }
+});
+route.get("/update-repo", (req, res) => {
+  // Use the full path to Git Bash
+  exec(
+    '"C:/Program Files/Git/bin/bash.exe" ./update_repo.sh',
+    { cwd: "C:/Users/MD Arif Alam/Desktop/ndmath/ndmath" },
+    (err, stdout, stderr) => {
+      if (err) {
+        console.error(`exec error: ${err}`);
+        return res.status(500).send("Failed to update repository");
+      }
+      console.log(`stdout: ${stdout}`);
+      console.error(`stderr: ${stderr}`);
+      res.send("Repository updated successfully");
+    }
+  );
 });
 
 route.get("/fileupdated", (req, res) => {

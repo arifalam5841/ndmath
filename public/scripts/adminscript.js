@@ -6,6 +6,7 @@ let slidebtn = document.getElementById("slide-btn");
 let slideoptioncont = document.getElementById("slideoption");
 let addslide = document.getElementById("addslide");
 let removeslide = document.getElementById("removeslide");
+let updatingbtn = document.getElementById("update-btn");
 
 let addingslidescont = document.getElementById("addslide-cont");
 let removingslidescont = document.getElementById("removingslidecont");
@@ -20,3 +21,15 @@ function blocknone(btn, nonebox, blockbox) {
 blocknone(alloptionscont, alloptionscont, slideoptioncont);
 blocknone(addslide, slideoptioncont, addingslidescont);
 blocknone(removeslide, slideoptioncont, removingslidescont);
+
+updatingbtn.addEventListener("click", function () {
+  axios
+    .get("http://localhost:3000/update-repo")
+    .then((response) => {
+      alert(response.data); // Show success message
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+      alert("Failed to update repository");
+    });
+});
