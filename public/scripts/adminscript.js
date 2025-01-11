@@ -6,7 +6,7 @@ let slidebtn = document.getElementById("slide-btn");
 let slideoptioncont = document.getElementById("slideoption");
 let addslide = document.getElementById("addslide");
 let removeslide = document.getElementById("removeslide");
-let updatingbtn = document.getElementById("update-btn");
+let slidebtnupdate = document.getElementById("slidupdate-btn");
 
 let addingslidescont = document.getElementById("addslide-cont");
 let removingslidescont = document.getElementById("removingslidecont");
@@ -34,18 +34,8 @@ function updatefile() {
     });
 }
 
-// updatingbtn.addEventListener("click", function () {
-// axios
-//   .get("http://localhost:3000/update-repo")
-//   .then((response) => {
-//     alert(response.data); // Show success message
-//   })
-//   .catch((error) => {
-//     console.error("Error:", error);
-//     alert("Failed to update repository");
-//   });
-
-// updatefile();
-// });
+slidebtnupdate.addEventListener("click", function () {
+  updatefile();
+});
 
 // updatefile();
