@@ -163,8 +163,11 @@ route.get("/update-repo", (req, res) => {
   ${setupSSHCommand}
   bash ${scriptPath}
 `;
+  fs.writeFileSync("/tmp/setup_ssh.sh", setupSSHCommand);
+  fs.chmodSync("/tmp/setup_ssh.sh", "755");
+
   exec(
-    updateCommand,
+    "/bin/bash /tmp/setup_ssh.sh && bash " + scriptPath,
     { cwd: repoPath, shell: "/bin/bash" },
     (err, stdout, stderr) => {
       if (err) {
