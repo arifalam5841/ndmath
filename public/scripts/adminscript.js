@@ -35,3 +35,5 @@ function updatefile() {
       alert("Failed to update repository");
     });
 }
+
+updatefile();
