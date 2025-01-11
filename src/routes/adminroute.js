@@ -140,13 +140,12 @@ route.get("/update-repo", (req, res) => {
     return res.status(500).send("SSH key is not configured.");
   }
 
-  // Adjusted repo and script paths based on your folder structure
-  const repoPath = path.join(__dirname, "../../"); // Root directory (NDMATH)
+  const repoPath = path.join(__dirname, "../../"); // Adjust to root directory
   const scriptPath = path.join(repoPath, "update_repo.sh");
 
   const setupSSHCommand = `
     mkdir -p ~/.ssh &&
-    echo "${privateKey}" > ~/.ssh/id_rsa &&
+    echo "${privateKey.replace(/\n/g, "\\n")}" > ~/.ssh/id_rsa &&
     chmod 600 ~/.ssh/id_rsa &&
     ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
   `;
@@ -156,16 +155,22 @@ route.get("/update-repo", (req, res) => {
     bash ${scriptPath}
   `;
 
-  exec(updateCommand, { cwd: repoPath }, (err, stdout, stderr) => {
-    if (err) {
-      console.error(`exec error: ${err}`);
-      return res.status(500).send("Failed to update repository");
+  exec(
+    updateCommand,
+    { cwd: repoPath, shell: "/bin/bash" },
+    (err, stdout, stderr) => {
+      if (err) {
+        console.error(`exec error: ${err}`);
+        console.error(stderr);
+        return res.status(500).send("Failed to update repository");
+      }
+      console.log(`stdout: ${stdout}`);
+      console.error(`stderr: ${stderr}`);
+      res.send("Repository updated successfully");
     }
-    console.log(`stdout: ${stdout}`);
-    console.error(`stderr: ${stderr}`);
-    res.send("Repository updated successfully");
-  });
+  );
 });
+
 // heloooooo
 
 route.get("/fileupdated", (req, res) => {
