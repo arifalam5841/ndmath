@@ -1,12 +1,18 @@
 #!/bin/bash
-REPO_PATH="/path/to/your/repository"
-cd $REPO_PATH
+echo "Starting the update script..."
 
-# Stage all changes
+REPO_PATH="C:\Users\MD Arif Alam\Desktop\ndmath\ndmath"
+echo "Changing directory to $REPO_PATH"
+cd $REPO_PATH || { echo "Repository path not found."; exit 1; }
+
+echo "Staging changes..."
 git add .
 
-# Commit the changes
+echo "Committing changes..."
 git commit -m "Button click updates"
 
-# Push the changes to GitHub
+echo "Pushing changes to GitHub..."
 git push
+
+echo "Finished the update script."
+
