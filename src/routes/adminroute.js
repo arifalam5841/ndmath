@@ -151,28 +151,29 @@ route.get("/update-repo", (req, res) => {
   const scriptPath = path.join(repoPath, "update_repo.sh");
 
   const setupSSHCommand = `
-    mkdir -p ~/.ssh &&
-    echo "${privateKey.replace(/\n/g, "\\n")}" > ~/.ssh/id_rsa &&
-    chmod 600 ~/.ssh/id_rsa &&
-    ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
-  `;
+  mkdir -p ~/.ssh &&
+  printf "${privateKey}" > ~/.ssh/id_rsa &&
+  chmod 600 ~/.ssh/id_rsa &&
+  ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
+`;
+
+  console.log("Private Key:", JSON.stringify(privateKey));
 
   const updateCommand = `
-    ${setupSSHCommand} &&
-    bash ${scriptPath}
-  `;
-
+  ${setupSSHCommand}
+  bash ${scriptPath}
+`;
   exec(
     updateCommand,
     { cwd: repoPath, shell: "/bin/bash" },
     (err, stdout, stderr) => {
       if (err) {
-        console.error(`exec error: ${err}`);
-        console.error(stderr);
+        console.error(`Exec error: ${err.message}`);
+        console.error("STDOUT:", stdout);
+        console.error("STDERR:", stderr);
         return res.status(500).send("Failed to update repository");
       }
-      console.log(`stdout: ${stdout}`);
-      console.error(`stderr: ${stderr}`);
+      console.log(`STDOUT: ${stdout}`);
       res.send("Repository updated successfully");
     }
   );
