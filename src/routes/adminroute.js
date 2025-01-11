@@ -91,6 +91,9 @@ route.post("/addingslide", uploadFields, async (req, res) => {
   const { slidehead, discription, degdip, branch } = req.body;
 
   const poster = req.files["bgimage"] ? req.files["bgimage"][0].filename : null;
+  const postes = req.files["bgimage"] ? req.files["bgimage"][0] : null;
+
+  console.log(postes);
   const pdfFile = req.files["slidepdf"]
     ? req.files["slidepdf"][0].filename
     : null;
