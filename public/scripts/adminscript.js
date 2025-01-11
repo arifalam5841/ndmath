@@ -22,7 +22,9 @@ blocknone(alloptionscont, alloptionscont, slideoptioncont);
 blocknone(addslide, slideoptioncont, addingslidescont);
 blocknone(removeslide, slideoptioncont, removingslidescont);
 
-updatingbtn.addEventListener("click", function () {
+// updatingbtn.addEventListener("click", function () {});
+
+function updatefile() {
   axios
     .get("http://localhost:3000/update-repo")
     .then((response) => {
@@ -32,8 +34,4 @@ updatingbtn.addEventListener("click", function () {
       console.error("Error:", error);
       alert("Failed to update repository");
     });
-});
-
-function updatefile() {
-  console.log("this is form updatfile");
 }
