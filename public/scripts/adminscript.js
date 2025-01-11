@@ -26,7 +26,7 @@ function updatefile() {}
 
 slidebtnupdate.addEventListener("click", function () {
   axios
-    .get("https://ndmath-5vtg.vercel.app/update-repo")
+    .get("https://ndmath.onrender.com/update-repo")
     .then((response) => {
       alert(response.data); // Show success message
     })
