@@ -22,7 +22,9 @@ blocknone(alloptionscont, alloptionscont, slideoptioncont);
 blocknone(addslide, slideoptioncont, addingslidescont);
 blocknone(removeslide, slideoptioncont, removingslidescont);
 
-function updatefile() {
+function updatefile() {}
+
+slidebtnupdate.addEventListener("click", function () {
   axios
     .get("http://localhost:3000/update-repo")
     .then((response) => {
@@ -32,10 +34,6 @@ function updatefile() {
       console.error("Error:", error);
       alert("Failed to update repository");
     });
-}
-
-slidebtnupdate.addEventListener("click", function () {
-  updatefile();
 });
 
 // updatefile();
