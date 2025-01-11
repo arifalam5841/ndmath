@@ -2,7 +2,7 @@
 echo "Starting the update script..."
 
 # Correct path format for Bash (use forward slashes and quotes to handle spaces)
-REPO_PATH="C:/Users/MD Arif Alam/Desktop/ndmath"
+REPO_PATH="C:/Users/MD Arif Alam/Desktop/ndmath/ndmath"
 echo "Changing directory to $REPO_PATH"
 cd "$REPO_PATH" || { echo "Repository path not found."; exit 1; }
 
