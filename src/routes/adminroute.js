@@ -146,7 +146,7 @@ route.get("/update-repo", async (req, res) => {
 
     const owner = "arifalam5841"; // Replace with your GitHub username
     const repo = "ndmath"; // Your repository name
-    const filePath = "slidefile.json";
+    const filePath = "../slidefile.json";
 
     const updatedContent = JSON.parse(
       fs.readFileSync("../slidefile.json", "utf-8")
