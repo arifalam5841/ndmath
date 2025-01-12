@@ -21,7 +21,8 @@ route.get("/admin-code", (req, res) => {
 async function initializeOctokit() {
   const { Octokit } = await import("@octokit/rest");
   return new Octokit({
-    auth: "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", // Replace with your PAT
+    // auth: "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", // Replace with your PAT
+    auth: process.env.GITHUB_TOKEN, // Replace with your PAT
   });
 }
 
