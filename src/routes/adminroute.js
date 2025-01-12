@@ -80,7 +80,7 @@ const uploadFields = upload.fields([
 ]);
 
 const pdfFolder = path.resolve(__dirname, "../../public/slidepdf");
-const jsonFilePath = path.join(__dirname, "slidefile.json");
+const jsonFilePath = path.join(__dirname, "../slidefile.json");
 console.log(pdfFolder);
 console.log(jsonFilePath);
 route.post("/addingslide", uploadFields, async (req, res) => {
