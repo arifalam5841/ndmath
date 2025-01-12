@@ -156,6 +156,7 @@ route.get("/update-repo", async (req, res) => {
       owner,
       repo,
       path: filePath,
+      ref: "main",
     });
 
     await octokit.repos.createOrUpdateFileContents({
@@ -168,6 +169,10 @@ route.get("/update-repo", async (req, res) => {
       ),
       sha: fileData.sha, // Required to update the file
     });
+    console.log(
+      "GitHub API URL:",
+      `https://api.github.com/repos/${owner}/${repo}/contents/${filePath}`
+    );
 
     res.status(200).send("Data saved and pushed to GitHub successfully.");
   } catch (err) {
