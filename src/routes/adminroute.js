@@ -140,17 +140,17 @@ route.post("/addingslide", uploadFields, async (req, res) => {
   }
 });
 
+// const jsonFilePath = path.resolve(__dirname, "../slidefile.json");
+
 route.get("/update-repo", async (req, res) => {
   try {
     const octokit = await initializeOctokit();
 
     const owner = "arifalam5841"; // Replace with your GitHub username
     const repo = "ndmath"; // Your repository name
-    const filePath = "../slidefile.json";
+    const filePath = "slidefile.json";
 
-    const updatedContent = JSON.parse(
-      fs.readFileSync("../slidefile.json", "utf-8")
-    );
+    const updatedContent = JSON.parse(fs.readFileSync(jsonFilePath, "utf-8"));
 
     const { data: fileData } = await octokit.repos.getContent({
       owner,
