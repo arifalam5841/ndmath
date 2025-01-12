@@ -1,3 +1,5 @@
+// import { Octokit } from "@octokit/rest";
+
 const { json } = require("body-parser");
 const express = require("express");
 const app = express();
@@ -15,6 +17,13 @@ route.get("/admin-code", (req, res) => {
     adminstatus: "admin",
   });
 });
+
+async function initializeOctokit() {
+  const { Octokit } = await import("@octokit/rest");
+  return new Octokit({
+    auth: "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", // Replace with your PAT
+  });
+}
 
 // "/admin" - at the place of admin we should put a code so that no one can access that page except admin
 // example - "/7865" or "/nd4521" etc
@@ -83,15 +92,6 @@ route.post("/addingslide", uploadFields, async (req, res) => {
   const pdfFile = req.files["slidepdf"]
     ? req.files["slidepdf"][0].filename
     : null;
-  // const poster = req.file ? req.file.filename : null;
-  // const pdfFile = req.file ? req.file.filename : null;
-  // const pdfFile = req.file ? req.file.filename : null;
-  // const pdfFile = req.file ? req.file.filename : null;
-  // const pdfFile = req.file ? req.file.filename : null;
-  // const pdfFile = req.file ? req.file.filename : null;
-  // const pdfFile = req.file ? req.file.filename : null;
-  // const pdfFile = req.file ? req.file.filename : null;
-  // new file
 
   try {
     console.log(slidehead, discription);
@@ -139,47 +139,40 @@ route.post("/addingslide", uploadFields, async (req, res) => {
   }
 });
 
-route.get("/update-repo", (req, res) => {
-  const privateKey = process.env.SSH_PRIVATE_KEY;
+route.get("/update-repo", async (req, res) => {
+  try {
+    const octokit = await initializeOctokit();
 
-  if (!privateKey) {
-    console.error("SSH_PRIVATE_KEY is not set.");
-    return res.status(500).send("SSH key is not configured.");
+    const owner = "arifalam5841"; // Replace with your GitHub username
+    const repo = "ndmath"; // Your repository name
+    const filePath = "slidefile.json";
+
+    const updatedContent = JSON.parse(
+      fs.readFileSync("../slidefile.json", "utf-8")
+    );
+
+    const { data: fileData } = await octokit.repos.getContent({
+      owner,
+      repo,
+      path: filePath,
+    });
+
+    await octokit.repos.createOrUpdateFileContents({
+      owner,
+      repo,
+      path: filePath,
+      message: "Update slidedata.json",
+      content: Buffer.from(JSON.stringify(updatedContent, null, 2)).toString(
+        "base64"
+      ),
+      sha: fileData.sha, // Required to update the file
+    });
+
+    res.status(200).send("Data saved and pushed to GitHub successfully.");
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Error updating GitHub file.");
   }
-
-  const repoPath = path.join(__dirname, "../../"); // Adjust to root directory
-  const scriptPath = path.join(repoPath, "update_repo.sh");
-
-  const setupSSHCommand = `
-  mkdir -p ~/.ssh &&
-  printf "${privateKey}" > ~/.ssh/id_rsa &&
-  chmod 600 ~/.ssh/id_rsa &&
-  ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
-`;
-
-  console.log("Private Key:", JSON.stringify(privateKey));
-
-  const updateCommand = `
-  ${setupSSHCommand}
-  bash ${scriptPath}
-`;
-  fs.writeFileSync("/tmp/setup_ssh.sh", setupSSHCommand);
-  fs.chmodSync("/tmp/setup_ssh.sh", "755");
-
-  exec(
-    "/bin/bash /tmp/setup_ssh.sh && bash " + scriptPath,
-    { cwd: repoPath, shell: "/bin/bash" },
-    (err, stdout, stderr) => {
-      if (err) {
-        console.error(`Exec error: ${err.message}`);
-        console.error("STDOUT:", stdout);
-        console.error("STDERR:", stderr);
-        return res.status(500).send("Failed to update repository");
-      }
-      console.log(`STDOUT: ${stdout}`);
-      res.send("Repository updated successfully");
-    }
-  );
 });
 
 // heloooooo
